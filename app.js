@@ -23,7 +23,8 @@ new Vue({
         return
       }
 
-
+      // monster attack
+      this.monsterAttacks()
     },
     specialAttack: function () {
       // decrement monsterHealth by the damage inflicted
@@ -38,8 +39,21 @@ new Vue({
       // monster attack
       this.monsterAttacks()
     },
-    heal: function () {},
-    giveUp: function () {},
+    heal: function () {
+      if (this.playerHealth <= 90) {
+        // increase player health by 10
+        this.playerHealth += 10
+      } else {
+        // set player health to 100, (no over-healing)
+        this.playerHealth = 100
+      }
+
+      // monster attacks
+      this.monsterAttacks();
+    },
+    giveUp: function () {
+      this.gameIsRunning = false;
+    },
     monsterAttacks: function () {
       // Monster damage to player
       this.playerHealth -= this.calculateDamage(5, 12)
