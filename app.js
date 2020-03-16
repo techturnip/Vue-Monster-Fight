@@ -25,12 +25,26 @@ new Vue({
       // decrement monsterHealth by the damage inflicted
       this.monsterHealth -= damage
 
+      // if monster health <= 0 then you win
+      if (this.monsterHealth <= 0) {
+        alert('You won!')
+        // set game is running = false
+        this.gameIsRunning = false
+        return
+      }
+
       // Monster damage to player
       // TODO: refactor to be more DRY
       max = 12
       min = 5
       damage = Math.max(Math.floor(Math.random() * max) + 1, min)
       this.playerHealth -= damage
+
+      if (this.playerHealth <= 0) {
+        alert('You lost...')
+        this.gameIsRunning = false
+        return
+      }
     },
     specialAttack: function () {},
     heal: function () {},
