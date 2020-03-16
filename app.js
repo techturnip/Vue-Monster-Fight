@@ -15,8 +15,17 @@ new Vue({
       this.monsterHealth = 100
     },
     attack: function () {
+      // store dmg variable so it can be used in log
+      let dmg = this.calculateDamage(3, 10)
+
       // decrement monsterHealth by the damage inflicted
-      this.monsterHealth -= this.calculateDamage(3, 10)
+      this.monsterHealth -= dmg
+
+      // add action to log
+      this.turns.unshift({
+        isPlayer: true,
+        text: 'Player hits Monster for ' + dmg
+      })
 
       // check if won
       if (this.checkWin()) {
@@ -56,8 +65,17 @@ new Vue({
       this.gameIsRunning = false;
     },
     monsterAttacks: function () {
+      // store dmg in variable for log access
+      let dmg = this.calculateDamage(5, 12)
+
       // Monster damage to player
-      this.playerHealth -= this.calculateDamage(5, 12)
+      this.playerHealth -= dmg
+
+      // add action to log
+      this.turns.unshift({
+        isPlayer: false,
+        text: 'Monster hits Player for ' + dmg
+      })
 
       // check for win
       // no need for if
