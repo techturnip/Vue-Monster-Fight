@@ -14,13 +14,8 @@ new Vue({
       this.monsterHealth = 100
     },
     attack: function () {
-      // Player damage to monster
-      // set max damage amount
-      let max = 10
-      // set min damage amount
-      let min = 3
       // set damage to be a random amount between 3 and 10
-      let damage = Math.max(Math.floor(Math.random() * max) + 1, min)
+      let damage = this.calculateDamage(3, 10)
 
       // decrement monsterHealth by the damage inflicted
       this.monsterHealth -= damage
@@ -35,9 +30,7 @@ new Vue({
 
       // Monster damage to player
       // TODO: refactor to be more DRY
-      max = 12
-      min = 5
-      damage = Math.max(Math.floor(Math.random() * max) + 1, min)
+      damage = this.calculateDamage(5, 12)
       this.playerHealth -= damage
 
       if (this.playerHealth <= 0) {
@@ -48,6 +41,9 @@ new Vue({
     },
     specialAttack: function () {},
     heal: function () {},
-    giveUp: function () {}
+    giveUp: function () {},
+    calculateDamage: function (min, max) {
+      return Math.max(Math.floor(Math.random() * max) + 1, min)
+    }
   }
 })
