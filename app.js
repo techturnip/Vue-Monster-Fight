@@ -20,16 +20,21 @@ new Vue({
       // decrement monsterHealth by the damage inflicted
       this.monsterHealth -= damage
 
+      // check if won
+      if (this.checkWin()) {
+        // return from attack method
+        return
+      }
+
       // Monster damage to player
       // TODO: refactor to be more DRY
       damage = this.calculateDamage(5, 12)
       this.playerHealth -= damage
 
-      if (this.playerHealth <= 0) {
-        alert('You lost...')
-        this.gameIsRunning = false
-        return
-      }
+      // check for win
+      // no need for if
+      // no additional code after checkWin
+      this.checkWin()
     },
     specialAttack: function () {},
     heal: function () {},
@@ -40,6 +45,7 @@ new Vue({
     checkWin: function () {
       // if monster health <= 0 then you win
       if (this.monsterHealth <= 0) {
+        // setup confirm dialog
         if (confirm('You won! New Game?')) {
           this.startGame()
         } else {
@@ -47,6 +53,7 @@ new Vue({
         }
         return true
       } else if (this.playerHealth <= 0) {
+        // setup confirm dialog
         if (confirm('You lost... New Game?')) {
           this.startGame()
         } else {
@@ -54,6 +61,7 @@ new Vue({
         }
         return true
       }
+      // game will continue
       return false
     }
   }
