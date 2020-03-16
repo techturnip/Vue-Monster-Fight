@@ -14,11 +14,8 @@ new Vue({
       this.monsterHealth = 100
     },
     attack: function () {
-      // set damage to be a random amount between 3 and 10
-      let damage = this.calculateDamage(3, 10)
-
       // decrement monsterHealth by the damage inflicted
-      this.monsterHealth -= damage
+      this.monsterHealth -= this.calculateDamage(3, 10)
 
       // check if won
       if (this.checkWin()) {
@@ -26,19 +23,32 @@ new Vue({
         return
       }
 
+
+    },
+    specialAttack: function () {
+      // decrement monsterHealth by the damage inflicted
+      this.monsterHealth -= this.calculateDamage(10, 20)
+
+      // check if won
+      if (this.checkWin()) {
+        // return from attack method
+        return
+      }
+
+      // monster attack
+      this.monsterAttacks()
+    },
+    heal: function () {},
+    giveUp: function () {},
+    monsterAttacks: function () {
       // Monster damage to player
-      // TODO: refactor to be more DRY
-      damage = this.calculateDamage(5, 12)
-      this.playerHealth -= damage
+      this.playerHealth -= this.calculateDamage(5, 12)
 
       // check for win
       // no need for if
       // no additional code after checkWin
       this.checkWin()
     },
-    specialAttack: function () {},
-    heal: function () {},
-    giveUp: function () {},
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min)
     },
