@@ -20,14 +20,6 @@ new Vue({
       // decrement monsterHealth by the damage inflicted
       this.monsterHealth -= damage
 
-      // if monster health <= 0 then you win
-      if (this.monsterHealth <= 0) {
-        alert('You won!')
-        // set game is running = false
-        this.gameIsRunning = false
-        return
-      }
-
       // Monster damage to player
       // TODO: refactor to be more DRY
       damage = this.calculateDamage(5, 12)
@@ -44,6 +36,25 @@ new Vue({
     giveUp: function () {},
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min)
+    },
+    checkWin: function () {
+      // if monster health <= 0 then you win
+      if (this.monsterHealth <= 0) {
+        if (confirm('You won! New Game?')) {
+          this.startGame()
+        } else {
+          this.gameIsRunning = false;
+        }
+        return true
+      } else if (this.playerHealth <= 0) {
+        if (confirm('You lost... New Game?')) {
+          this.startGame()
+        } else {
+          this.gameIsRunning = false;
+        }
+        return true
+      }
+      return false
     }
   }
 })
