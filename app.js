@@ -12,6 +12,10 @@ new Vue({
       // Reset health for fresh game
       this.playerHealth = 100;
       this.monsterHealth = 100;
-    }
+    },
+    attack: function () {},
+    specialAttack: function () {},
+    heal: function () {},
+    giveUp: function () {}
   }
 })
