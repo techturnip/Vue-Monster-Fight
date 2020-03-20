@@ -1,5 +1,5 @@
 new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     playerHealth: 100,
     monsterHealth: 100,
@@ -13,6 +13,7 @@ new Vue({
       // Reset health for fresh game
       this.playerHealth = 100;
       this.monsterHealth = 100;
+      this.turns = [];
     },
     attack: function() {
       // store dmg variable so it can be used in log
@@ -24,7 +25,7 @@ new Vue({
       // add action to log
       this.turns.unshift({
         isPlayer: true,
-        text: 'Player hits Monster for ' + dmg
+        text: "Player hits Monster for " + dmg
       });
 
       // check if won
@@ -46,7 +47,7 @@ new Vue({
       // add action to log
       this.turns.unshift({
         isPlayer: true,
-        text: 'Player hits Monster hard for ' + dmg
+        text: "Player hits Monster hard for " + dmg
       });
 
       // check if won
@@ -70,7 +71,7 @@ new Vue({
       // add action to log
       this.turns.unshift({
         isPlayer: true,
-        text: 'Player heals for 10'
+        text: "Player heals for 10"
       });
 
       // monster attacks
@@ -89,7 +90,7 @@ new Vue({
       // add action to log
       this.turns.unshift({
         isPlayer: false,
-        text: 'Monster hits Player for ' + dmg
+        text: "Monster hits Player for " + dmg
       });
 
       // check for win
@@ -104,7 +105,7 @@ new Vue({
       // if monster health <= 0 then you win
       if (this.monsterHealth <= 0) {
         // setup confirm dialog
-        if (confirm('You won! New Game?')) {
+        if (confirm("You won! New Game?")) {
           this.startGame();
         } else {
           this.gameIsRunning = false;
@@ -112,7 +113,7 @@ new Vue({
         return true;
       } else if (this.playerHealth <= 0) {
         // setup confirm dialog
-        if (confirm('You lost... New Game?')) {
+        if (confirm("You lost... New Game?")) {
           this.startGame();
         } else {
           this.gameIsRunning = false;
